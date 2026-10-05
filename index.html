@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sic Bo Miracle</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0f17">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+[hidden]{display:none!important}
+#auth{max-width:420px;margin:0 auto;padding:60px 18px}
+#auth h2{margin:0 0 4px;font-size:24px}
+#auth p{color:var(--mute);margin:0 0 18px}
+#auth input{display:block;width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px;margin-bottom:10px}
+#auth .go{width:100%;padding:13px;border-radius:12px;background:#2f6b57;color:#fff;font-weight:700;margin-bottom:10px}
+#auth .alt{background:#26324a}
+#amsg{color:#e08a7a;min-height:20px;font-size:14px}
+.acct{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:13px}
+.acct #out{background:#26324a;color:var(--ink);padding:8px 12px;border-radius:8px}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;
+--bg:#0b0f17;--card:#141b27;--ink:#e3e8f2;--mute:#8693aa;--line:#243044;--acc:#4f6fb8;--bs:38%;--bl:17%;--bgimg:linear-gradient(170deg,#0d1220,#0a0e15 60%,#0b1514)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg) var(--bgimg) fixed;color:var(--ink);font:16px/1.4 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+main{max-width:480px;margin:0 auto;padding:14px 14px 40px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid #7f9be0;outline-offset:2px}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.nav button{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--line);color:var(--ink);font-size:24px}
+.nav div{text-align:center;font-weight:600}
+.nav small{display:block;color:var(--mute);font-weight:400}
+.sum{background:linear-gradient(135deg,#1b2447,#2a1d3f 65%,#1f2a3a);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.big{font-size:38px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1.1}
+.big span{font-size:18px;font-weight:500;color:var(--mute);letter-spacing:0}
+.bar{height:8px;border-radius:4px;background:#0b0f17;margin:10px 0 12px;overflow:hidden}
+.bar i{display:block;height:100%;background:#4aa383;width:0;transition:width .25s}
+.mini{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.mini div{font-size:12px;color:var(--mute)}
+.mini b{display:block;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.box{--h:0;position:relative;aspect-ratio:1/1;width:100%;background:hsl(var(--h) var(--bs) var(--bl));border:2px solid hsl(var(--h) 35% 32%);border-radius:16px;padding:8px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;color:var(--ink)}
+.box .hn{font-size:13px;font-weight:700}
+.box small{line-height:1.3;font-size:11px;font-weight:600;color:var(--mute);white-space:nowrap}
+.box b{font-size:19px;font-variant-numeric:tabular-nums}
+.box.done{background:hsl(var(--h) 40% 28%);border-color:hsl(var(--h) 45% 42%)}
+.box.done small,.box.done b{opacity:.6}
+.box.done:before,.box.done:after{content:"";position:absolute;left:50%;top:50%;width:150%;height:3px;background:hsl(var(--h) 55% 68%);border-radius:2px}
+.box.done:before{transform:translate(-50%,-50%) rotate(45deg)}
+.box.done:after{transform:translate(-50%,-50%) rotate(-45deg)}
+.box input{width:100%;font:inherit;font-size:16px;font-weight:700;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:4px 8px}
+.row{display:flex;gap:10px;margin:14px 0 4px}
+.row button{flex:1;padding:13px;border-radius:14px;background:#26324a;border:1px solid #36456a;font-weight:700}
+.row button.on{background:#2f6b57;border-color:#3f8a71}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:10px}
+summary{padding:13px 14px;font-weight:600;cursor:pointer}
+.set{padding:0 14px 14px;display:grid;gap:12px}
+.set label{display:grid;gap:4px;color:var(--mute);font-size:14px}
+.set input{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;width:100%}
+.set textarea{font:inherit;font-size:13px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;resize:vertical}
+.two{display:flex;gap:10px}.two button{flex:1}
+.step{display:flex;align-items:center;gap:12px}
+.step button{width:44px;height:44px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:20px}
+.step b{min-width:28px;text-align:center;font-size:18px;color:var(--ink)}
+.set .go{background:#2f6b57;color:#fff;padding:11px;border-radius:10px;font-weight:600}
+.hint{color:var(--mute);font-size:13px;text-align:center;margin-top:10px}
+</style>
+</head>
+<body>
+<section id="auth" hidden>
+  <h2>Sic Bo Miracle</h2>
+  <p>Sign in, or create an account the first time.</p>
+  <form id="af">
+    <input id="em" type="email" autocomplete="username" placeholder="Email" required>
+    <input id="pw" type="password" autocomplete="current-password" placeholder="Password" required>
+    <button class="go" type="submit">Sign in</button>
+    <button class="go alt" id="signup" type="button">Create new account</button>
+  </form>
+  <div id="amsg"></div>
+</section>
+<main id="app" hidden>
+  <div class="nav">
+    <button id="prev" aria-label="Previous day">&lsaquo;</button>
+    <div><span id="dlabel"></span><small id="dsub"></small></div>
+    <button id="next" aria-label="Next day">&rsaquo;</button>
+  </div>
+  <div class="sum">
+    <div class="big"><span>Rs.</span> <span id="dEarn" style="font-size:38px;color:var(--ink);font-weight:700">0</span></div>
+    <div style="color:var(--mute);font-size:14px" id="dOf"></div>
+    <div class="bar"><i id="fill"></i></div>
+    <div class="mini">
+      <div>Month earned<b id="mEarn">0</b></div>
+      <div>Monthly capital<b id="cap">0</b></div>
+          </div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="row"><button id="edit">Edit targets</button></div>
+  <p class="hint" id="hint">Tap a box when you reach that hour's target.</p>
+  <details>
+    <summary>Settings</summary>
+    <div class="set">
+      <div class="acct"><span id="who"></span><span id="sync"></span><button id="out" type="button" hidden>Sign out</button></div>
+      <label>Hours per day
+        <div class="step"><button id="hm" aria-label="Fewer hours">&minus;</button><b id="hv"></b><button id="hp" aria-label="More hours">+</button></div>
+      </label>
+      <label>Monthly capital (Rs.) <span id="capm"></span>
+        <input id="capIn" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 50000">
+      </label>
+      <label>Set the same target for every hour (Rs.)
+        <input id="allIn" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 500">
+      </label>
+      <button class="go" id="apply">Save settings</button>
+      <label>Backup &amp; restore
+        <textarea id="bk" rows="4" placeholder="Tap Backup to get your data here, or paste a backup and tap Restore"></textarea>
+      </label>
+      <div class="two"><button class="go" id="bkb">Backup (copy)</button><button class="go" id="rst">Restore</button></div>
+      <p class="hint" id="bkm"></p>
+    </div>
+  </details>
+</main>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* Firebase config for the Sic Bo Miracle project */
+var firebaseConfig={
+  apiKey:"AIzaSyB3QdAs-1vYGyT_PT-PI3c2R4rHWJXNJzg",
+  authDomain:"sic-bo-miracle.firebaseapp.com",
+  projectId:"sic-bo-miracle",
+  storageBucket:"sic-bo-miracle.firebasestorage.app",
+  messagingSenderId:"843141837739",
+  appId:"1:843141837739:web:acc89229e4b840d22118ee"
+};
+var KEY="hourly-earn-v1",S,view,editing=false,$=function(i){return document.getElementById(i)};
+function def(){var t=[];for(var i=0;i<15;i++)t.push(500);return{hours:12,targets:t,capital:{},days:{}}}
+function load(){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}if(!S||!S.targets)S=def()}
+var db=null,auth=null,user=null,tmr=null;
+function setSync(t){var e=document.getElementById("sync");if(e)e.textContent=t}
+function cloudSave(){
+  if(!user||!db)return;clearTimeout(tmr);setSync("Saving...");
+  tmr=setTimeout(function(){
+    db.collection("earnings_users").doc(user.uid).set({data:JSON.stringify(S),updated:Date.now()})
+      .then(function(){setSync("Saved online")},function(){setSync("Not saved online yet")});
+  },600);
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}cloudSave()}
+function iso(d){var m=d.getMonth()+1,x=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(x<10?"0":"")+x}
+function parse(s){var p=s.split("-");return new Date(p[0],p[1]-1,p[2])}
+function lab(i){var a=8+i,b=a+1;function f(h){return (h%12||12)}function p(h){return h%24<12?"AM":"PM"}
+  return p(a)===p(b)?f(a)+"\u2013"+f(b)+" "+p(b):f(a)+" "+p(a)+"\u2013"+f(b)+" "+p(b)}
+function fmt(n){return Number(n).toLocaleString("en-US",{maximumFractionDigits:2})}
+function capFor(m){if(S.capital[m]!=null)return S.capital[m];var k=Object.keys(S.capital).filter(function(x){return x<m}).sort();return k.length?S.capital[k[k.length-1]]:0}
+function dayEarn(d){var o=S.days[d]||{},t=0;Object.keys(o).forEach(function(k){if(+k<S.hours)t+=o[k]});return t}
+function render(){
+  var d=parse(view),today=iso(new Date()),m=view.slice(0,7);
+  $("dlabel").textContent=d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"short"});
+  $("dsub").textContent=view===today?"Today":d.getFullYear();
+  var done=S.days[view]||{},tgt=0,e=0,h="";
+  for(var i=0;i<S.hours;i++){
+    tgt+=S.targets[i];var on=done[i]!=null;if(on)e+=done[i];
+    if(editing)h+='<div class="box" style="--h:'+(i*24)+'"><small><span class="hn">Hour '+(i+1)+'</span><br>'+lab(i)+'</small><input type="number" inputmode="decimal" min="0" step="any" data-i="'+i+'" value="'+S.targets[i]+'" aria-label="Target for hour '+(i+1)+', '+lab(i)+'"></div>';
+    else h+='<button class="box'+(on?" done":"")+'" style="--h:'+(i*24)+'" data-i="'+i+'" aria-pressed="'+on+'"><small><span class="hn">Hour '+(i+1)+'</span><br>'+lab(i)+'</small><b>'+fmt(on?done[i]:S.targets[i])+'</b></button>';
+  }
+  $("grid").innerHTML=h;
+  $("dEarn").textContent=fmt(e);
+  $("dOf").textContent="of Rs. "+fmt(tgt)+" target";
+  $("fill").style.width=(tgt?Math.min(100,e/tgt*100):0)+"%";
+  var me=0;Object.keys(S.days).forEach(function(k){if(k.slice(0,7)===m)me+=dayEarn(k)});
+  var c=capFor(m);
+  $("mEarn").textContent=fmt(me);$("cap").textContent=fmt(c);
+  $("hv").textContent=S.hours;
+  $("capm").textContent="for "+d.toLocaleDateString("en-GB",{month:"long",year:"numeric"});
+  $("edit").textContent=editing?"Done editing":"Edit targets";
+  $("edit").className=editing?"on":"";
+  $("hint").textContent=editing?"Change the target for any hour, then tap Done editing.":"Tap a box when you reach that hour's target.";
+}
+$("grid").addEventListener("click",function(e){
+  if(editing)return;var b=e.target.closest("button.box");if(!b)return;
+  var i=b.getAttribute("data-i"),o=S.days[view]=S.days[view]||{};
+  if(o[i]!=null)delete o[i];else o[i]=S.targets[i];
+  if(!Object.keys(o).length)delete S.days[view];
+  save();render();
+});
+$("grid").addEventListener("change",function(e){
+  var i=e.target.getAttribute("data-i");if(i==null)return;
+  var v=parseFloat(e.target.value);S.targets[i]=v>=0?v:0;save();render();
+});
+$("edit").addEventListener("click",function(){editing=!editing;render()});
+function shift(n){var d=parse(view);d.setDate(d.getDate()+n);view=iso(d);render()}
+$("prev").onclick=function(){shift(-1)};$("next").onclick=function(){shift(1)};
+$("hm").onclick=function(){if(S.hours>10){S.hours--;save();render()}};
+$("hp").onclick=function(){if(S.hours<15){S.hours++;save();render()}};
+$("apply").onclick=function(){
+  var c=parseFloat($("capIn").value),a=parseFloat($("allIn").value);
+  if(c>=0)S.capital[view.slice(0,7)]=c;
+  if(a>=0)for(var i=0;i<15;i++)S.targets[i]=a;
+  $("capIn").value="";$("allIn").value="";save();render();
+};
+$("bkb").onclick=function(){
+  var t=JSON.stringify(S),m=$("bkm");$("bk").value=t;
+  function ok(){m.textContent="Backup copied. Paste it somewhere safe, like Notes or a chat with yourself."}
+  function no(){$("bk").select();m.textContent="Copy the text above and keep it somewhere safe."}
+  try{navigator.clipboard.writeText(t).then(ok,no)}catch(e){no()}
+};
+$("rst").onclick=function(){
+  var m=$("bkm"),o;try{o=JSON.parse($("bk").value.trim())}catch(e){o=null}
+  if(!o||!Array.isArray(o.targets)||!o.days||typeof o.days!=="object"||!o.capital||typeof o.capital!=="object"||!(o.hours>=10&&o.hours<=15)){m.textContent="That is not a valid backup. Paste the full backup text and try again.";return}
+  if(!confirm("Replace all current data with this backup?"))return;
+  while(o.targets.length<15)o.targets.push(500);
+  S=o;save();render();$("bk").value="";m.textContent="Backup restored."
+};
+function startApp(){$("auth").hidden=true;$("app").hidden=false;render()}
+function amsg(t){$("amsg").textContent=t}
+function nice(e){var c=e.code||"";
+  if(/wrong-password|invalid-credential|user-not-found/.test(c))return"Wrong email or password.";
+  if(c==="auth/email-already-in-use")return"This email already has an account. Tap Sign in.";
+  if(c==="auth/weak-password")return"Password must be at least 6 characters.";
+  if(c==="auth/network-request-failed")return"No internet connection.";
+  return e.message||"Something went wrong."}
+load();view=iso(new Date());
+if(typeof firebase!=="undefined"&&firebaseConfig.apiKey.indexOf("PASTE")<0){
+  firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();
+  try{db.enablePersistence({synchronizeTabs:true}).catch(function(){})}catch(e){}
+  auth.onAuthStateChanged(function(u){
+    user=u;
+    if(!u){$("app").hidden=true;$("auth").hidden=false;return}
+    $("who").textContent=u.email;$("out").hidden=false;
+    db.collection("earnings_users").doc(u.uid).get().then(function(d){
+      if(d.exists){try{var o=JSON.parse(d.data().data);if(o&&o.targets){S=o;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}}catch(e){}setSync("Saved online")}
+      else cloudSave();
+      startApp();
+    }).catch(function(){startApp();setSync("Offline: using phone copy")});
+  });
+  $("af").addEventListener("submit",function(e){e.preventDefault();amsg("");
+    auth.signInWithEmailAndPassword($("em").value.trim(),$("pw").value).catch(function(x){amsg(nice(x))})});
+  $("signup").onclick=function(){amsg("");var em=$("em").value.trim(),pw=$("pw").value;
+    if(!em||!pw){amsg("Enter an email and password first.");return}
+    auth.createUserWithEmailAndPassword(em,pw).catch(function(x){amsg(nice(x))})};
+  $("out").onclick=function(){if(!confirm("Sign out? Your data stays saved online."))return;
+    try{localStorage.removeItem(KEY)}catch(e){}S=def();auth.signOut()};
+}else{startApp()}
+if("serviceWorker" in navigator)window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
+</script>
+</body>
+</html>
